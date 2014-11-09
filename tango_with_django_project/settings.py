@@ -1,5 +1,14 @@
 # Django settings for tango_with_django_project project.
 
+# Dynamic Template path
+import os
+
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -66,9 +75,11 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    STATIC_PATH,
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -107,8 +118,11 @@ ROOT_URLCONF = 'tango_with_django_project.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
-import os
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
+
+
+TEMPLATE_DIRS = (TEMPLATE_PATH,
+)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
